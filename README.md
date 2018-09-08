@@ -46,9 +46,9 @@ Example: packetTrail.py 10.0.0.20 514
 
 ### How to Build Windows Binary 
 If you're not comfortable running the provided Windows binary, you can build your own version using pyinstaller.
-```
-Requirements
 
+Requirements
+```
 Software:
 Python 3.6.4 
 
