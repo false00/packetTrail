@@ -20,6 +20,15 @@ Python
 pip install psutil
 ```
 
+### Supported OS
+```
+
+Windows 7
+Windows 10
+macOS High Sierra 10.13.6
+Ubuntu 16.04
+```
+
 ### How to Run
 
 Windows
