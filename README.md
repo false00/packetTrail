@@ -20,9 +20,8 @@ Python
 pip install psutil
 ```
 
-### Supported OS
+### Supported Operating Systems
 ```
-
 Windows 7
 Windows 10
 macOS High Sierra 10.13.6
