@@ -5,9 +5,9 @@ This program creates a record of every network connection on a system and genera
 ```
 Log Sample:
 syslog format = log_priority + utc_timestamp + host_ip + host_hostname + program_name + process + sip + sport + rip + rport
-<12>2018-09-08T11:27:19Z 192.168.50.129 juans-windowsvm packetTrail process=chrome.exe sip=192.168.50.129 sport=50434 rip=172.217.5.195 rport=443
-<12>2018-09-08T11:27:19Z 192.168.50.129 juans-windowsvm packetTrail process=chrome.exe sip=192.168.50.129 sport=50433 rip=216.58.219.10 rport=443
-<12>2018-09-08T11:27:19Z 192.168.50.129 juans-windowsvm packetTrail process=firefox.exe sip=127.0.0.1 sport=50400 rip=127.0.0.1 rport=50399
+<12>2018-09-08T11:27:19Z 192.168.50.129 juans-windowsvm packetTrail process=powershell.exe sip=192.168.50.129 sport=50434 rip=192.168.50.134 rport=80
+<12>2018-09-08T11:27:19Z 192.168.50.129 juans-windowsvm packetTrail process=explorer.exe sip=192.168.50.129 sport=50433 rip=192.168.50.134 rport=80
+<12>2018-09-08T11:27:19Z 192.168.50.129 juans-windowsvm packetTrail process=notepad.exe sip=192.168.50.129 sport=50400 rip=192.168.50.134 rport=80
 ```
 
 ## Getting Started
