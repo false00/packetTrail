@@ -1,6 +1,8 @@
 # packetTrail
 
-This program creates a record of every network connection on a system and generates a log that contains the process name that initiated the connection. packetTrail supports forwarding these logs real time via syslog. This data has potential to assist SOC/IR teams in incident response and threat hunting.    
+This program creates a record of every network connection on a system and generates a log that contains the process name that initiated the connection. packetTrail supports forwarding these logs real time via syslog. 
+
+packetTrail assists SOC/IR teams in incident response missions and threat hunting.    
 ```
 Log Sample:
 syslog format = log_priority + utc_timestamp + host_ip + host_hostname + program_name + process + sip + sport + rip + rport
