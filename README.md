@@ -1,6 +1,8 @@
 # packetTrail
 
-This program creates a record of every network connection on a system and generates a log that contains the process name that initiated the connection. This gives attribution to which process generated what traffic. Thus, allowing an incident responder or SOC analyst visibility into the host. Use cases are endless, but the log data can be used for incident response missions or threat hunting. For example, if powershell.exe calls to an IP, dies, then that same IP is observed communicating with explorer.exe, it can be an Indicator of possible process injection.
+This program creates a record of every network connection on a system and generates a log that contains the process name that initiated the connection. This gives attribution to which process generated what traffic. Thus, allowing an incident responder or SOC analyst visibility into the host. Use cases are endless, but the log data can be used for incident response missions or threat hunting. 
+
+For example, if powershell.exe beacons out to an IP, dies, then that same IP is observed communicating with explorer.exe, this may be an indicator of malware injecting itself into another process. packetTrail would produce the data required to detect something like this. You could also create baselines using packetTrail and trigger on anomalies that don't match your baseline. It can be used many different ways. Currently it only supports forwarding logs via syslog and writing to a local file. I'm working on adding elasticsearch support soon. If you find any bugs let me know. I'd appreciate it. 
    
 ```
 Log Sample:
@@ -41,6 +43,13 @@ Python
 ```
 Usage: packetTrail.py syslog_ip syslog_udp_port
 Example: packetTrail.py 10.0.0.20 514
+```
+
+### How to Install as a Service
+
+Windows
+```
+sc create packetTrail binPath= "C:\packetTrail-master\packetTrail-master\packetTrail.exe 127.0.0.1 514"
 ```
 
 ### How to Build Windows Binary 
