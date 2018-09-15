@@ -49,7 +49,7 @@ Example: packetTrail.py 10.0.0.20 514
 
 Windows
 ```
-sc create packetTrail binPath= "C:\packetTrail-master\packetTrail-master\packetTrail.exe 127.0.0.1 514"
+sc create packetTrail binPath= "C:\packetTrail-master\packetTrail-master\packetTrail.exe 10.0.0.20 514"
 ```
 
 ### How to Build Windows Binary 
