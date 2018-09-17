@@ -87,7 +87,7 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 ## Authors
 
-* **Juan Ortega** - *Initial work* - [falseShepherd](https://github.com/ucatech)
+* **Juan Ortega** - *Initial work* - [falseShepherd](https://github.com/false00)
 
 ## License
 
