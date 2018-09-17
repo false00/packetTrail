@@ -55,6 +55,8 @@ Example: packetTrail.py 10.0.0.20 514
 Windows
 ```
 sc create packetTrail binPath= "C:\packetTrail-master\packetTrail-master\packetTrail.exe 10.0.0.20 514"
+sc config "packetTrail"  start= auto
+net start packetTrail
 ```
 
 ### How to Build Windows Binary 
