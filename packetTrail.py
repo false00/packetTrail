@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 #
 # NAME - packetTrail.py
-# Version 1.0
+# Version 1.1
 #
 # SYNOPSIS
 # python3 ./packetTrail.py 10.0.0.1 514
@@ -16,6 +16,7 @@
 #
 # Date(YYYY/MM/DD):     Version:        Modified By:    Description of Change:
 # 2018-09-08             1.0            Juan Ortega     First Working Version of Script
+# 2018-09-23             1.1            Juan Ortega     Added username and process id. Performance Improvements.
 
 import socket
 import psutil
@@ -27,49 +28,57 @@ import time
 #UDP Socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
+
 def main():
-    #Dictionary
-    #SPORT:PROCESS - If Sport and Process combination are new; action.
+
     global udp_ip
     global udp_port
 
     watchlist = {}
     while 1:
-        time.sleep(1)
+        time.sleep(.5)
         for i in psutil.net_connections(kind='inet4'):
             try:
-                #Get Process Name Using PID
-                p = psutil.Process(i.pid)
-                process = p.name().split()[0]
 
-                #Timestamp
-                eventTime = datetime.datetime.utcnow().replace(microsecond=0).isoformat() + "Z"
-
-                #Local
-                localip = get_ip()
-                hostname = socket.gethostname()
-
-                #Source
-                sip = str(i.laddr).split('\'')[1]
-                sport = i.laddr.port
-
-                #Destination
+                # Destination IP, if null skip
                 try:
                     rip = str(i.raddr).split('\'')[1]
                 except:
-                    rip = 'null'
                     continue
 
-                try:
+                # Get PID
+                pid = i.pid
+
+                # Source Port
+                sport = i.laddr.port
+
+                if (sport, pid) not in watchlist.items():
+                    watchlist[sport] = pid
+
+                    # Destination Port
                     rport = str(i.raddr).split(',')[1].strip().strip(')').strip("port=")
-                except:
-                    rport = 'null'
-                    continue
 
-                if (sport, process) not in watchlist.items():
-                    watchlist[sport] = process
-                    log = ("process=" + str(process) + " sip=" + str(sip) + " sport=" + str(sport) + " rip=" + str(rip) + " rport=" + str(rport))
-                    message = "<12>" + str(eventTime) + " " + localip + " " + hostname + " " + str("packetTrail") + " " + str(log)
+                    # Get Source IP
+                    sip = str(i.laddr).split('\'')[1]
+
+                    # Get Username
+                    username = psutil.Process(pid).username()
+                    username = ''.join(username.split())
+
+                    # Get Process Name Using PID
+                    p = psutil.Process(pid)
+                    process_name = p.name()
+                    process_name = ''.join(process_name.split())
+
+                    # Timestamp
+                    event_time = datetime.datetime.utcnow().replace(microsecond=0).isoformat() + "Z"
+
+                    # Local
+                    local_ip = get_ip()
+                    hostname = socket.gethostname()
+
+                    log = (" username=" + str(username) + " process=" + str(process_name) + " pid=" + str(pid) + " sip=" + str(sip) + " sport=" + str(sport) + " rip=" + str(rip) + " rport=" + str(rport))
+                    message = "<12>" + str(event_time) + " " + local_ip + " " + hostname + " " + str("packetTrail") + str(log)
                     logger.info(message)
                     sock.sendto(str.encode(message), (udp_ip, udp_port))
 
